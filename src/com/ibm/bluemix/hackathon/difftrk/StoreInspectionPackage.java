@@ -2,11 +2,14 @@ package com.ibm.bluemix.hackathon.difftrk;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream.PutField;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.cloudant.client.api.Changes;
 import com.cloudant.client.api.CloudantClient;
+import com.cloudant.client.api.Database;
 import com.google.gson.JsonObject;
 
 public class StoreInspectionPackage {
@@ -88,7 +91,11 @@ public class StoreInspectionPackage {
 				String password = new String("fc22f227b14bb7f2c087ad178a6849aad313c51f3bbccb5eab886d644300786a");
 				
 				CloudantClient client = new CloudantClient(url, username, password);
+
+				Database db = client.database("inspections", false);
 				
+				db.save(difftrkObj);
+			    
 				/* client.get */
 
 			} catch (Exception e) {
