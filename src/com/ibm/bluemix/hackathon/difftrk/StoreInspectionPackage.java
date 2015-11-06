@@ -47,11 +47,8 @@ public class StoreInspectionPackage {
 			err.printStackTrace();
 		}
 		
-		String url = new String("https://61fc7816-dbdf-46ca-80f8-6603ecd9f9f1-bluemix:fc22f227b14bb7f2c087ad178a6849aad313c51f3bbccb5eab886d644300786a@61fc7816-dbdf-46ca-80f8-6603ecd9f9f1-bluemix.cloudant.com");
-		String username = new String("61fc7816-dbdf-46ca-80f8-6603ecd9f9f1-bluemix");
-		String password = new String("fc22f227b14bb7f2c087ad178a6849aad313c51f3bbccb5eab886d644300786a");
+
 		
-		CloudantClient client = new CloudantClient(url, username, password);
 	}
 
 	public boolean storeFile(String trackNumber, String fileName) throws IOException {
@@ -59,6 +56,7 @@ public class StoreInspectionPackage {
 		boolean result = true;
 
 		JsonObject difftrkObj = new JsonObject();
+		
 
 		difftrkObj.addProperty("id", trackNumber + "|" + fileName);
 		System.out.println(difftrkObj);
@@ -83,6 +81,15 @@ public class StoreInspectionPackage {
 				System.out.println(fileContentsAsString);
 
 				difftrkObj.addProperty("contents", fileContentsAsString);
+				
+				/* From information sent by Phong */
+				String url = new String("https://61fc7816-dbdf-46ca-80f8-6603ecd9f9f1-bluemix:fc22f227b14bb7f2c087ad178a6849aad313c51f3bbccb5eab886d644300786a@61fc7816-dbdf-46ca-80f8-6603ecd9f9f1-bluemix.cloudant.com");
+				String username = new String("61fc7816-dbdf-46ca-80f8-6603ecd9f9f1-bluemix");
+				String password = new String("fc22f227b14bb7f2c087ad178a6849aad313c51f3bbccb5eab886d644300786a");
+				
+				CloudantClient client = new CloudantClient(url, username, password);
+				
+				/* client.get */
 
 			} catch (Exception e) {
 				e.printStackTrace();
